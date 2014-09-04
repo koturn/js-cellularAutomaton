@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Cellular Automaton</title>
+  <link rel="stylesheet" href="css/index.css" type="text/css" media="screen"/>
+  <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+  <![endif]-->
+</head>
+<body>
+
+<header>
+  <h1 style="color: white;">Cellular Automaton</h1>
+</header>
+
+<canvas id="ca-canvas" width="300" height="300"></canvas>
+
+<div class="rule-area">
+  <input type="checkbox" id="sw1" class="toggle" onchange="changeRule(this, 0)"/>
+  <span><label for="sw1">000</label></span>
+  <input type="checkbox" id="sw2" class="toggle" onchange="changeRule(this, 1)"/>
+  <span><label for="sw2">001</label></span>
+  <input type="checkbox" id="sw3" class="toggle" onchange="changeRule(this, 2)"/>
+  <span><label for="sw3">010</label></span>
+  <input type="checkbox" id="sw4" class="toggle" onchange="changeRule(this, 3)"/>
+  <span><label for="sw4">011</label></span>
+</div>
+<div class="rule-area">
+  <input type="checkbox" id="sw5" class="toggle" onchange="changeRule(this, 4)"/>
+  <span><label for="sw5">100</label></span>
+  <input type="checkbox" id="sw6" class="toggle" onchange="changeRule(this, 5)"/>
+  <span><label for="sw6">101</label></span>
+  <input type="checkbox" id="sw7" class="toggle" onchange="changeRule(this, 6)"/>
+  <span><label for="sw7">110</label></span>
+  <input type="checkbox" id="sw8" class="toggle" onchange="changeRule(this, 7)"/>
+  <span><label for="sw8">111</label></span>
+</div>
+<div id="rule-name"></div>
+
+<script src="js/cellularAutomaton.js"></script>
+<script>
+'use strict';
+
+var DEFAULT_RULE = [0, 1, 0, 1, 1, 0, 1, 0];  // Rule 90
+var ca = new CellularAutomaton('ca-canvas', 2, DEFAULT_RULE, 'rgb(0, 255, 0)');
+var elms = document.getElementsByClassName('toggle');
+var ruleName = document.getElementById('rule-name');
+
+function changeRule(e, idx) {
+  ca.rule[idx] = +e.checked;
+  ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
+  ca.updateAll();
+  ca.draw();
+}
+
+function binary2Decimal(binArray) {
+  var sum = 0;
+  for (var i = 0; i < binArray.length; i++) {
+    sum += (binArray[i] << i);
+  }
+  return sum;
+}
+
+window.onload = function() {
+  for (var i = 0; i < elms.length; i++) {
+    if (DEFAULT_RULE[i]) {
+      elms[i].checked = true;
+    }
+  }
+  ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
+  ca.initBoard();
+  ca.updateAll();
+  ca.draw();
+}
+</script>
+
+<a href="https://github.com/koturn/js-cellularAutomaton/">
+  <img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png">
+</a>
+</body>
+</html>

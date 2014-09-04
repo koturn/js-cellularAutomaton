@@ -1,0 +1,85 @@
+body {
+  background-image: url(../img/universe.gif);
+  text-align: center;
+}
+header > h1 {
+  font-size: 32pt;
+  -webkit-transform: perspective(100) rotateX(20deg);
+  -moz-transform: perspective(100) rotateX(20deg);
+}
+#ca-canvas {
+  background-color: rgba(0, 0, 0, 0);
+  border-color: white;
+  border-width: 1px;
+  border-style: solid;
+  display: block;
+  margin: auto;
+}
+.rule-area {
+  margin: auto;
+  padding: 20px 0px 0px 0px;
+  width: 300px;
+}
+
+input[type="checkbox"].toggle {
+  display: none;
+}
+input.toggle+span>label {
+  border-color: lightgray;
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 4px 1px 4px 1px;
+  margin: 0px 5px 0px 5px;
+  position: relative;
+  height: 20px;
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+  background: -moz-linear-gradient(white, lightgray);
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(lightgray));
+  background: -o-linear-gradient(white, lightgray);
+  background: -ms-linear-gradient(white, lightgray);
+  background: linear-gradient(white, lightgray);
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+input.toggle+span:focus {
+  outline: none;
+}
+input.toggle+span:focus>label:before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  height: 20px;
+  width: 60px;
+  outline: dotted 1px black;
+}
+input.toggle:checked+span>label {
+  border-style: inset;
+  font-weight: bold;
+  box-shadow: 1px 1px 0 gray inset;
+  background: -moz-linear-gradient(lightgray, white);
+  background: -webkit-gradient(linear, left top, left bottom, from(lightgray), to(white));
+  background: -o-linear-gradient(lightgray, white);
+  background: -ms-linear-gradient(lightgray, white);
+  background: linear-gradient(lightgray, white);
+}
+input.toggle:not(:checked)+span>label {
+  border-style: outset;
+  box-shadow: 1px 1px 0 white inset;
+  background: -moz-linear-gradient(white, lightgray);
+  background: -webkit-gradient(linear, left top, left bottom, from(white), to(lightgray));
+  background: -o-linear-gradient(white, lightgray);
+  background: -ms-linear-gradient(white, lightgray);
+  background: linear-gradient(white, lightgray);
+}
+
+#rule-name {
+  color: white;
+  margin: 10px 0px 0px 0px;
+  font-size: 18pt;
+  font-weight: bold;
+}
