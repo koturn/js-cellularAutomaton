@@ -1,5 +1,6 @@
 body {
   background-image: url(../img/universe.gif);
+  color: white;
   text-align: center;
 }
 header > h1 {
