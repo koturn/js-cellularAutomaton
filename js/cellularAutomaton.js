@@ -75,7 +75,7 @@ CellularAutomaton.prototype.animationDraw = function(updatetime) {
 
     setTimeout(function() {
       i++;
-      loop(i);
+      loop();
     }, updatetime);
   }
   loop();
