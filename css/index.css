@@ -26,6 +26,8 @@ input[type="checkbox"].toggle {
   display: none;
 }
 input.toggle+span>label {
+  color: black;
+  font-weight: bold;
   border-color: lightgray;
   border-radius: 5px;
   border-width: 1px;

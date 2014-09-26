@@ -52,6 +52,7 @@ var ruleName = document.getElementById('rule-name');
 function changeRule(e, idx) {
   ca.rule[idx] = +e.checked;
   ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
+  ca.animationDraw(30);
   ca.updateAll();
   ca.draw();
 }

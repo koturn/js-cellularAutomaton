@@ -55,6 +55,8 @@ CellularAutomaton.prototype.draw = function() {
 
 
 CellularAutomaton.prototype.animationDraw = function(updatetime) {
+  if (this.timerId !== void 0) clearInterval(this.timerId);
+  
   this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
   for (var i = 0; i < this._nCol; i++) {
     if (this._board[i] == 1) {
@@ -62,21 +64,16 @@ CellularAutomaton.prototype.animationDraw = function(updatetime) {
     }
   }
 
-  var __this = this;
   var i = 1;
-  var loop = function() {
-    if (i == __this._nRow) return;
+  var __this = this;
+  this.timerId = setInterval(function() {
+    if (i >= __this._nRow) clearInterval(__this.timerId);
     __this.update(i);
     for (var j = 0; j < __this._nCol; j++) {
       if (__this._board[i * __this._nCol + j] == 1) {
         __this._ctx.fillRect(j * __this._cellSize, i * __this._cellSize, __this._cellSize, __this._cellSize);
       }
     }
-
-    setTimeout(function() {
-      i++;
-      loop();
-    }, updatetime);
-  }
-  loop();
+    i++;
+  }, updatetime);
 };
