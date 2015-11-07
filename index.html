@@ -42,40 +42,44 @@
 
 <script src="js/cellularAutomaton.js"></script>
 <script>
-'use strict';
+(function(global, undefined) {
+  'use strict';
 
-var DEFAULT_RULE = [0, 1, 0, 1, 1, 0, 1, 0];  // Rule 90
-var ca = new CellularAutomaton('ca-canvas', 2, DEFAULT_RULE, 'rgb(0, 255, 0)');
-var elms = document.getElementsByClassName('toggle');
-var ruleName = document.getElementById('rule-name');
+  var DEFAULT_RULE = [0, 1, 0, 1, 1, 0, 1, 0];  // Rule 90
+  var ca = new CellularAutomaton('ca-canvas', 2, DEFAULT_RULE, 'rgb(0, 255, 0)');
+  var elms = global.document.getElementsByClassName('toggle');
+  var ruleName = global.document.getElementById('rule-name');
 
-function changeRule(e, idx) {
-  ca.rule[idx] = +e.checked;
-  ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
-  ca.animationDraw(30);
-  ca.updateAll();
-  ca.draw();
-}
-
-function binary2Decimal(binArray) {
-  var sum = 0;
-  for (var i = 0; i < binArray.length; i++) {
-    sum += (binArray[i] << i);
+  function changeRule(e, idx) {
+    ca.rule[idx] = +e.checked;
+    ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
+    ca.animationDraw(30);
+    ca.updateAll();
+    ca.draw();
   }
-  return sum;
-}
 
-window.onload = function() {
-  for (var i = 0; i < elms.length; i++) {
-    if (DEFAULT_RULE[i]) {
-      elms[i].checked = true;
+  function binary2Decimal(binArray) {
+    var sum = 0;
+    for (var i = 0; i < binArray.length; i++) {
+      sum += (binArray[i] << i);
     }
+    return sum;
   }
-  ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
-  ca.initBoard();
-  ca.updateAll();
-  ca.draw();
-}
+
+  global.onload = function() {
+    for (var i = 0; i < elms.length; i++) {
+      if (DEFAULT_RULE[i]) {
+        elms[i].checked = true;
+      }
+    }
+    ruleName.innerHTML = 'RULE: ' + binary2Decimal(ca.rule);
+    ca.initBoard();
+    ca.updateAll();
+    ca.draw();
+  }
+
+  global.changeRule = changeRule;
+})((this || 0).self || global);
 </script>
 
 <a href="https://github.com/koturn/js-cellularAutomaton/">
